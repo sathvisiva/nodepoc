@@ -1,0 +1,78 @@
+<div class="page-wrap">
+	<div class="page-body"> 	
+
+		<div class="row" ng-if="rs_isLoggedIn && !rs_isManage"> 
+			<div class="col-sm-12">
+				<ul id="subNav" class="clearfix">
+					<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</div> 
+		
+		<div class="row">
+			<div class="col-md-12"> 
+				<div class="cart-card">
+					<div class="cart-head"> 
+						<table>
+							<tr>
+								<td class="cart-head-img"><img src="/temp/carthtml/images/1.jpg"></td>
+								<td class="cart-head-name">This is 7-11 Cool Store</td>
+								<td class="cart-head-price">Total : Php 12,000.00</td>
+							</tr>
+						</table>
+					</div>
+					<div class="cart-body">
+						<table class="table">
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									3 x Php 120
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td> 
+							</tr>
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									3 x Php 120
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td> 
+							</tr>
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									3 x Php 120
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td> 
+							</tr>
+						</table>
+					</div>
+					<div class="cart-foot">
+						<div class="row">
+							<div class="col-sm-8">
+								<p class="m0">123 St. Koko Village, Pasig City</p>
+								<p class="m0">Payment Method : BDO</p>
+							</div>
+							<div class="col-sm-4">
+								<input type="submit" value="Cancel Order" class="btn-sm btn btn-warning btn-block">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	

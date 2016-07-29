@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  if(objProducts && objProducts.length > 0)
+    #productGridWrap.col-sm-12.col-md-12
+      each objProduct in objProducts
+        .productGrid
+          .product-box
+            a(href='/#{objUser.store.url}/#{objProduct.url}')
+              span.product-box-img
+                -var strProdImg = objProduct.images[0]['img1'] || objProduct.images[0]['img2'] || objProduct.images[0]['img3'] || objProduct.images[0]['img4'] || 'none.jpg';
+                img(src='/uploads/#{objUser._id}/products/sm/#{strProdImg}')
+                span.product-box-shadow
+              span.product-box-meta.clearfix.show
+                -if(objProduct.sale.off > 0){
+                  span.pull-right.pad0.text-right.product-price-wrap.product-price-sale
+                    | PHP
+                    span.product-price #{objProduct.price - (objProduct.price * (objProduct.sale.off/100))}
+                  span.pull-right.pad0.text-right.product-price-wrap.product-price-orig.mr5
+                    | PHP
+                    span.product-price #{objProduct.price}
+                  span.pull-right.pad0.text-right.product-price-wrap.text-danger.mr5
+                    | #{objProduct.sale.off} % off
+                -}else{
+                  span.pull-right.pad0.text-right.product-price-wrap
+                    | PHP
+                    span.product-price #{objProduct.price}
+                -}
+                span.pad0 #{objProduct.name}

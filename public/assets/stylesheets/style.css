@@ -1,0 +1,36 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-x: hidden; 
+}
+
+a {
+  color: #00B7FF;
+}
+
+#content-views { position:relative; overflow: hidden; }
+
+.ng-enter, .ng-leave { width:100%; position:absolute; }
+
+.ng-enter {
+	-webkit-animation:slideInLeft 0.5s both ease-in;
+	-moz-animation:slideInLeft 0.5s both ease-in;
+	animation:slideInLeft 0.5s both ease-in;
+}
+
+.ng-leave {
+	-webkit-animation:slideOutRight 0.5s both ease-in;
+	-moz-animation:slideOutRight 0.5s both ease-in;
+	animation:slideOutRight 0.5s both ease-in;
+}
+
+.messagebox.ng-enter {
+	-webkit-animation:slideInDown 1.5s both ease-in;
+	-moz-animation:slideInDown 1.5s both ease-in;
+	animation:slideInDown 1.5s both ease-in;
+}
+.messagebox.ng-leave {
+	-webkit-animation:slideInUp 1.5s both ease-in;
+	-moz-animation:slideInUp 1.5s both ease-in;
+	animation:slideInUp 1.5s both ease-in;
+}

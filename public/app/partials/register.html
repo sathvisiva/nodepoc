@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="col-sm-6 col-md-4 col-md-push-4 col-sm-push-3">
+		<form  ng-submit="submitRegister()" name="registerForm" class="account-form">
+			<div class="whitebox pad20">
+				<h2 class="text-center m0 m20">Register</h2>
+				<div class="input-group mb10">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-envelope"></i>
+					</span>
+					<input type="text" ng-model="register.username" placeholder="Email address" autocomplete="off" class="form-control input-sm" required>
+				</div>
+				<div class="input-group mb10">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-lock"></i>
+					</span>
+					<input type="password" ng-model="register.password" placeholder="Password" autocomplete="off" class="form-control input-sm" required>
+				</div> 
+				<div class="input-group mb10 hide">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-shopping-cart"></i>
+					</span>
+					<input type="text" ng-model="register.storename" placeholder="Shop Name" autocomplete="off" class="form-control input-sm">
+				</div>
+				<div class="input-group mb10">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-user"></i>
+					</span>
+					<input type="text" ng-model="register.fullname" placeholder="Fullname" autocomplete="off" class="form-control input-sm" required>
+				</div>
+				<div class="alert alert-danger messagebox" ng-if="registerError">{{registerError}}</div> 
+				<div class="alert alert-success messagebox" ng-if="registerSuccess">Registration successful. <a href="/login">You can now login.</a></div> 
+				<p class="text-center mb20">
+					<input type="submit" value="Join" class="btn btn-primary btn-block" ng-disabled="registerForm.$invalid">
+				</p>
+				<p class="clearfix pad5 font12">
+					<a href="/login" class="">Login</a>
+					<a href="/forgot" class="pull-right">Forgot Password</a>
+				</p>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<div class="page-wrap">
+	<div class="page-body" ng-if="arrWishlists">
+		
+		<div class="row" ng-if="rs_isLoggedIn && !rs_isManage"> 
+			<div class="col-sm-12">
+				<ul id="subNav" class="clearfix">
+					<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</div> 
+
+		<div class="row" id="wishlistProducts">
+			<div class="col-md-12"> 
+				<div class="product-card-list wishlist-card" ng-repeat="objWish in arrWishlists" ng-if="objWish.status == 'active'">
+					<div class="product-image">
+						<img ng-src="/uploads/{{objWish.store.id}}/products/sm/{{objWish.images[0].img1 || objWish.images[0].img2 || objWish.images[0].img3 || objWish.images[0].img4 || 'none.jpg'}}">
+					</div>
+					<div class="product-meta">
+						<h4 class="clearfix">
+							<span class="product-price">PHP <span>{{objWish.price | currency:"":0}}</span></span>
+							<a class="black-text" href="/p/{{objWish.prodid}}">{{objWish.name}}</a>
+						</h4>
+						<p class="clearfix">
+							<a class="gray-text" href="/@{{objWish.store.url}}">@{{objWish.store.name}}</a>
+							<a href="#" class="pull-right text-danger ml10" ng-click="removeFromWishlist(objWish._id)">Remove</a> 
+							<span class="padLR10 pull-right">&bull;</span>
+							<a href="/p/{{objWish.prodid}}" class="pull-right text-success ml10">View</a>
+						</p>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	<div class="page-body" ng-if="!arrWishlists">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="whitebox">No products found.</h4>
+			</div>
+		</div>
+	</div>
+</div>	

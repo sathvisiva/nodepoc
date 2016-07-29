@@ -1,0 +1,369 @@
+<div class="row" ng-if="!rs_me">
+	<div class="col-xs-12">
+		<table class="homeTable">
+			<tr>
+				<td align="right" valign="middle">
+					<h1 id="logo">
+						<span class="white-text">seven</span>E<span class="white-text">leven</span></h1>
+					<p id="tagline">Create your FREE online STORE!</p>
+				</td>
+				<td valign="middle">
+					<ul id="list">
+						<li>Online Store management</li>
+						<li>Beautiful premade themes</li>
+						<li>Marketing and Promotions</li>
+						<li>Reports and Analytics</li>
+						<li>
+							<a href="/login" class="btn btn-primary padLR30">Login</a>
+							<a href="/register" class="btn btn-primary padLR30">Register</a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div> 
+</div>
+
+<div id="homeProducts" ng-if="rs_me">
+	<div class="page-wrap" ng-if="rs_isLoggedIn && rs_me && !rs_isManage">
+		<div class="page-body" ng-if="homeProducts.length > 0">
+
+			<div class="row" ng-if="rs_isLoggedIn && !rs_isManage"> 
+				<div class="col-sm-12">
+					<ul id="subNav" class="clearfix">
+						<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+						<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+						<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+						<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+						<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div> 
+
+			<div class="row"> 
+				<div class="col-md-3 col-sm-4" ng-repeat="objProduct in homeProducts">
+					<div class="product-card product-card-cool product-card-cool-sm"> 
+						<a href="/p/{{objProduct.prodid}}">
+							<span class="product-name">{{objProduct.name}}</span>
+							<img ng-src="/uploads/{{objProduct.store.id}}/products/sm/{{objProduct.images[0].img1 || objProduct.images[0].img2 || objProduct.images[0].img3 || objProduct.images[0].img4 || 'none.jpg'}}">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">Php <span>{{objProduct.price | currency:"":0}}</span></div>
+							<a href="/p/{{objProduct.prodid}}" class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a href="/p/{{objProduct.prodid}}" class="product-like" ng-if="!objProduct.inCartItem">
+								<i class="fa fa-cart-plus"></i> Cart
+							</a>
+							<a href="/my/cart/{{objProduct.store.id}}" class="product-like product-like-active" ng-if="objProduct.inCartItem">
+								<i class="fa fa-cart-plus"></i> Cart
+							</a>
+							<a class="product-wishlist product-wishlist-active" ng-if="objProduct.isWishListed" ng-click="removeFromWishlist(objProduct._id)">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a> 
+							<a class="product-wishlist" ng-if="!objProduct.isWishListed" ng-click="addToWishlist(objProduct._id)">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a> 
+						</div> 
+					</div>
+				</div>  
+			</div>
+			<div class="row hide"> 
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/1.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div> 
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/2.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div> 
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/3.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div>  
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/7.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div> 
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/8.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div> 
+				<div class="col-md-4 col-sm-6">
+					<div class="product-card product-card-cool"> 
+						<a href="/p/B1AUiUhl">
+							<span class="product-name">This is a very cool productThis is a very cool product</span>
+							<img src="/temp/carthtml/images/bags/9.jpg">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>120</span></div>
+							<a class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a class="product-like">
+								<i class="glyphicon glyphicon-heart"></i> 100
+							</a>
+							<a class="product-wishlist">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a>
+						</div> 
+					</div>
+				</div>   
+			</div>
+
+			<div class="row hide"> 
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div> 
+			</div>
+			<div class="row hide"> 
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="product-card">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div> 
+			</div>
+
+			<!-- 4 column -->
+			<div class="row hide">  
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row hide">  
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="product-card product-card-sm">
+						<a href="/p/B1AUiUhl">
+							<img src="/temp/carthtml/images/1.jpg">
+							<span class="product-meta clearfix">
+								<span class="product-price">PHP <span>120</span></span>
+								This is a very cool leather bag
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-body" ng-if="homeProducts.length == 0">
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="text-center whitebox">No products to display.</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

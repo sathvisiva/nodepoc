@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-sm-6 col-md-4 col-md-push-4 col-sm-push-3 col-xs-10 col-xs-push-1">
+		<form  ng-submit="submitLogin()" class="account-form" name="loginForm">
+			<div class="whitebox pad20">
+				<h2 class="text-center m0 m20">Login</h2>
+				<div class="input-group mb10">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-envelope"></i>
+					</span>
+					<input type="text" ng-model="login.username" placeholder="Username" autocomplete="off" class="form-control input-sm" required>
+				</div>
+				<div class="input-group mb10">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="glyphicon glyphicon-lock"></i>
+					</span>
+					<input type="password"  ng-model="login.password" placeholder="Password" autocomplete="off" class="form-control input-sm" required>
+				</div> 
+				<div class="alert alert-danger messagebox" ng-if="loginError">{{loginError}}</div> 
+				<p class="text-center mb20">
+					<input type="submit" value="Login" class="btn btn-primary btn-block" ng-disabled="loginForm.$invalid">
+				</p>
+				<p class="clearfix pad5 font12">
+					<a href="/register" class="">Register</a>
+					<a href="/forgot" class="pull-right">Forgot Password</a>
+				</p>
+			</div>
+		</form>
+	</div>
+</div>

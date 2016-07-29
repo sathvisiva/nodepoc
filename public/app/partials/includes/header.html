@@ -1,0 +1,74 @@
+<div class="page-head" ng-if="rs_isLoggedIn && rs_isManage">
+	<div class="row">
+		<div class="col-sm-2">
+			<a id="mainLogo" class="cp" ng-click="manageout()">MEAN cart</a>
+		</div>
+		<div class="col-sm-10">
+			<ul id="mainVav">
+				<li><a href="/manage/products/add" class="btn btn-primary">Add New</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'products'}" href="/manage/products">Product</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/manage/orders">Orders</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'customers'}" href="/manage/customers">Customers</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'settings'}" href="/manage/settings">Settings</a></li>
+				<li><a class="cp" ng-click="logout()">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="page-head" ng-if="rs_isLoggedIn && !rs_isManage">
+	<div class="row">
+		<div class="col-sm-2">
+			<a id="mainLogo" class="cp" ng-click="manageout()">MEAN CARD</a>
+		</div>
+		<div class="col-sm-10">
+			<ul id="mainVav">
+				<li>
+					<a ng-click="manageStore()" class="btn btn-primary" ng-if="rs_hasStore">Manage Store</a>
+					<a href="/manage/settings" class="btn btn-primary" ng-if="!rs_hasStore">Create Store</a>
+				</li>
+				<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+				<li><a ng-click="logout()" class="cp">Logout</a></li>
+			</ul> 
+		</div>
+	</div>
+</div> 
+
+<div class="page-head" ng-if="!rs_isHidePublicHeader">
+	<div class="row">
+		<div class="col-sm-2">
+			<a id="mainLogo" class="cp" href="/">711</a>
+		</div>
+		<div class="col-sm-10">
+			<ul id="mainVav"> 
+				<li><a ng-class="{'active' : rs_pagePath == 'login'}" href="/login">Login</a></li>
+				<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/register">Register</a></li> 
+			</ul> 
+		</div>
+	</div>
+</div> 
+ 
+<div class="row hide" ng-if="rs_isLoggedIn && !rs_isManage"> 
+	<div class="col-sm-12">
+		<ul id="subNav" class="clearfix">
+			<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+			<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+			<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+			<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+			<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
+	</div>
+</div> 
+
+<div class="page-wrap mb0" ng-if="rs_isLoggedIn && !rs_isManage && !rs_hasProfile">
+	<div class="page-body">
+		<div class="alert alert-danger mb0">
+			Please complete your <a href="/my/profile">profile here</a>.
+		</div>
+	</div>
+</div>

@@ -1,0 +1,58 @@
+<div class="page-wrap">
+	<div class="page-body"> 
+
+		<div class="row" ng-if="rs_isLoggedIn && !rs_isManage"> 
+			<div class="col-sm-12">
+				<ul id="subNav" class="clearfix">
+					<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</div> 
+			
+		<div class="row">
+			<div class="col-md-6 col-md-push-3"> 
+				<form name="profileForm" ng-submit="submitProfile()">
+					<div class="form-card">
+						<h2 class="form-card-title">Profile</h2>
+						<div class="form-card-body">
+							<p>
+								<label>Address (required)</label>
+								<input type="text" class="form-control input-sm" ng-model="profile.address1" required/>
+							</p>
+							<p>
+								<label>Address 2</label>
+								<input type="text" class="form-control input-sm" ng-model="profile.address2" />
+							</p>
+							<p>
+								<label>Address 3</label>
+								<input type="text" class="form-control input-sm" ng-model="profile.address3" />
+							</p>
+							<p>
+								<label>Contact Number (required)</label>
+								<input type="text" class="form-control input-sm" ng-model="profile.number" required />
+							</p> 
+						</div>
+					</div>  
+					<div class="form-card pad20">
+						<div class="row">
+							<div class="col-md-12">
+								<p ng-if="isProfileSuccess" class="alert alert-success">Success</p>
+								<p ng-if="isProfileError" class="alert alert-success">Error</p>
+							</div>
+						</div>
+						<div class="row"> 
+							<div class="col-md-12">
+								<input type="submit" value="Save Changes" class="btn btn-block btn-primary" ng-disabled="profileForm.$invalid">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>	

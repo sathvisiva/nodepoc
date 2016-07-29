@@ -1,0 +1,170 @@
+<div class="page-wrap">
+	<div class="page-body" ng-if="objCartlist">
+
+		<div class="row" ng-if="rs_isLoggedIn && !rs_isManage"> 
+			<div class="col-sm-12">
+				<ul id="subNav" class="clearfix">
+					<li><a ng-class="{'active' : rs_pagePath == ''}" href="/">Home</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'wishlist'}" href="/my/wishlist">Wishlist</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'orders'}" href="/my/orders">Orders</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'cart'}" href="/my/cart">Cart</a></li>
+					<li><a ng-class="{'active' : rs_pagePath == 'profile'}" href="/my/profile">Profile</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</div> 
+		
+		<div class="row">
+			<div class="col-md-12"> 
+				<div class="cart-card" ng-repeat="storeCart in objCartlist">
+					<div class="cart-head"> 
+						<table>
+							<tr>
+								<td class="cart-head-img">
+									<a href="/@{{storeCart.store.url}}">
+										<img ng-src="{{storeCart.store.avatar != 'none.jpg' ? '/uploads/' + storeCart._id + '/' + storeCart.store.avatar : '/uploads/none.jpg'}}">
+									</a>
+								</td>
+								<td class="cart-head-name"><a href="/@{{storeCart.store.url}}">{{storeCart.store.name}}</a></td>
+								<td class="cart-head-price">Total : Php {{storeCart.totalCartPrice | currency:"":0}}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="cart-body">
+						<table class="table">
+							<tr ng-repeat="cartItem in storeCart.cartItems" class="fx-slide">
+								<td class="cart-prod-img">
+									<a href="/p/{{cartItem.prodid}}"> 
+										<img ng-src="/uploads/{{storeCart._id}}/products/md/{{cartItem.images[0].img1 || cartItem.images[0].img2 || cartItem.images[0].img3 || cartItem.images[0].img4 || 'none.jpg'}}">
+									</a>
+								</td>
+								<td class="cart-prod-name">{{cartItem.name}}</td>
+								<td class="cart-prod-qty">
+									<div class="input-group input-group-sm">
+										<input type="number" min="1" value="{{cartItem.quantity}}" ng-change="updateCartItem(intCartQnty, cartItem.cartid)" ng-model="intCartQnty" class="form-control">
+										<span class="input-group-addon" ng-if="!cartItem.isOnSale">x P {{cartItem.price | currency:"":0}}</span>
+										<span class="input-group-addon" ng-if="cartItem.isOnSale">x P {{cartItem.saleprice | currency:"":0}}</span>
+									</div>
+								</td>
+								<td class="cart-prod-total">
+									<div ng-if="cartItem.isOnSale">
+										<div class="price-sale">Php {{cartItem.saleprice | currency:"":0}}</div>
+										<div class="price-orig">{{cartItem.sale.off}}% off <span>Php {{cartItem.price | currency:"":0}}</span></div>
+									</div>
+									<div ng-if="!cartItem.isOnSale">
+										Php {{cartItem.price | currency:"":0}}
+									</div>
+								</td>
+								<td class="cart-prod-remove">
+									<a href="#" ng-click="removeCartItem(cartItem, $parent.$index, $index)">
+										<i class="glyphicon glyphicon-trash"></i>
+									</a>
+								</td>
+							</tr> 
+						</table>
+					</div>
+					<div class="cart-foot">
+						<div class="row">
+							<div class="col-sm-4">
+								<select class="input-sm form-control">
+									<option>Shipping Address</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="input-sm form-control">
+									<option>Payment Method</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<input type="submit" value="Submit This Cart" class="btn-sm btn btn-primary btn-block">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cart-card hide">
+					<div class="cart-head"> 
+						<table>
+							<tr>
+								<td class="cart-head-img"><img src="/temp/carthtml/images/1.jpg"></td>
+								<td class="cart-head-name">This is 7-11 Cool Store</td>
+								<td class="cart-head-price">Total : Php 12,000.00</td>
+							</tr>
+						</table>
+					</div>
+					<div class="cart-body">
+						<table class="table">
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									<div class="input-group input-group-sm">
+										<input type="number" min="1" value="1" class="form-control">
+										<span class="input-group-addon">x Php 120</span>
+									</div>
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td>
+								<td class="cart-prod-remove"><a>x</a></td>
+							</tr>
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									<div class="input-group input-group-sm">
+										<input type="number" min="1" value="1" class="form-control">
+										<span class="input-group-addon">x Php 120</span>
+									</div>
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td>
+								<td class="cart-prod-remove"><a>x</a></td>
+							</tr>
+							<tr>
+								<td class="cart-prod-img">
+									<img src="/temp/carthtml/images/1.jpg">
+								</td>
+								<td class="cart-prod-name">This is a product name</td>
+								<td class="cart-prod-qty">
+									<div class="input-group input-group-sm">
+										<input type="number" min="1" value="1" class="form-control">
+										<span class="input-group-addon">x Php 120</span>
+									</div>
+								</td>
+								<td class="cart-prod-total">Php 1,000.00</td>
+								<td class="cart-prod-remove"><a>x</a></td>
+							</tr>
+						</table>
+					</div>
+					<div class="cart-foot">
+						<div class="row">
+							<div class="col-sm-4">
+								<select class="input-sm form-control">
+									<option>Shipping Address</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="input-sm form-control">
+									<option>Payment Method</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<input type="submit" value="Submit This Cart" class="btn-sm btn btn-primary btn-block">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-body" ng-if="!objCartlist">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="whitebox">No items found.</h4>
+			</div>
+		</div>
+	</div>
+</div>	

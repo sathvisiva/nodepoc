@@ -1,0 +1,141 @@
+<div class="page-wrap">
+	<div class="page-body" ng-if="objProduct && objProduct.status == 'active'">
+		<div class="row">
+			<div class="col-sm-7 col-md-8">
+				<div class="productview">
+					<div class="productview-head"> 
+						<h2>{{objProduct.name}}</h2> 
+					</div>
+					<div class="productview-body">  
+						<div class="productview-img mb20">
+							<img ng-src="/uploads/{{objProduct.store.id}}/products/md/{{objProduct.images[0].img1 || objProduct.images[0].img2 || objProduct.images[0].img3 || objProduct.images[0].img4 || 'none.jpg'}}"> 
+						</div> 
+						<div class="productview-desc" ng-bind-html="objProduct.desc != 'undefined' ? objProduct.desc : '' | sanitize"></div> 
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-5 col-md-4">
+				<div class="productview-addtocart"> 
+					<div ng-if="!isProductInCart">
+						<div ng-if="!objCart.added" class="fx-slide">
+							<div class="input-group input-group-sm mb5">
+								<input type="number" min="1" ng-model="objCart.quantity" class="form-control text-center">
+								<span class="input-group-addon">x Php <strong>{{objProduct.price | currency:"":0}}</strong></span>
+							</div>
+							<input type="submit" value="Add to Cart" class="btn btn-primary btn-block mb10" ng-click="addToCart()" ng-if="rs_me">
+							<a href="/login" class="btn btn-primary btn-block mb10" ng-if="!rs_me">Add to Cart</a>
+						</div>
+						<div ng-if="objCart.added" class="mb5 fx-slide">
+							<a href="/my/cart/{{objStore._id}}" class="btn btn-block btn-success mb10">Added to Cart, Click to Update</a>
+						</div>
+					</div>
+					<div ng-if="isProductInCart">
+						<a href="/my/cart/{{objStore._id}}" class="btn btn-block btn-success mb10">Added to Cart, Click to Update</a>
+					</div>
+					<p class="text-center m0 mb10">or</p>
+					<div ng-if="rs_me">
+						<p class="m0"><a href="#" class="btn btn-block btn-default" ng-if="!isProductWishlisted" ng-click="addToWishlist(objProduct._id)">Add to Wishist</a></p>
+						<p class="m0"><a href="#" class="btn btn-block btn-warning" ng-if="isProductWishlisted" ng-click="removeFromWishlist(objProduct._id)">Remove from Wishist</a></p>
+					</div>
+					<div ng-if="!rs_me">
+						<a href="/login" class="btn btn-default btn-block" ng-if="!rs_me">Add to Wishlist</a>
+					</div>
+				</div>
+				<div class="productview-storeinfo"> 
+					<a href="/@{{objStore.store.url}}">
+						<img ng-src="{{objStore.store.avatar != 'none.jpg' ? '/uploads/' + objProduct.store.id + '/' + objStore.store.avatar : '/uploads/none.jpg'}}"> 
+						<strong>{{objStore.store.name}}</strong>
+						<span>{{objStore.store.description}}</span>
+					</a>
+				</div>
+				<div class="productview-related mb20"> 
+					<h5 class="m0 pad20">Related Products</h5>
+					<div class="productview-related-item" ng-if="objRelatedProducts" ng-repeat="objRelated in objRelatedProducts">
+						<a href="/p/{{objRelated.prodid}}">
+							<img ng-src="/uploads/{{objProduct.store.id}}/products/sm/{{objRelated.images[0].img1 || objRelated.images[0].img2 || objRelated.images[0].img3 || objRelated.images[0].img4 || 'none.jpg'}}">
+							<span class="productview-related-name">{{objRelated.name}}</span>
+							<span class="productview-related-meta clearfix show">
+								0 Reviews
+								<span class="pull-right">Php {{objRelated.price | currency:"":0}}</span>
+							</span>
+						</a>
+					</div> 
+					<div class="productview-reviews-item" ng-if="!objRelatedProducts">
+						No related products found.
+					</div>
+				</div>
+				<div class="productview-reviews mb20"> 
+					<h5 class="m0 clearfix pad20">
+						Reviews (30)
+						<span class="product-reviews-star pull-right">
+							<i class="fa fa-star text-danger"></i>
+							<i class="fa fa-star text-danger"></i>
+							<i class="fa fa-star text-danger"></i>
+							<i class="fa fa-star text-danger"></i>
+							<i class="fa fa-star text-default"></i>
+						</span>
+					</h5>
+					<div class="productview-reviews-item"> 
+						<div class="product-review-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ut, a </div>
+						<div class="product-review-head">
+							<img src="/assets/images/avatar.jpg">
+							<div class="productview-reviews-name clearfix">
+								by <a href="#">Koko M.</a>
+								<span class="product-reviews-star pull-right">
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-default"></i>
+								</span>
+							</div>
+						</div>  
+					</div>
+					<div class="productview-reviews-item"> 
+						<div class="product-review-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ut, a </div>
+						<div class="product-review-head">
+							<img src="/assets/images/avatar.jpg">
+							<div class="productview-reviews-name clearfix">
+								by <a href="#">Koko M.</a>
+								<span class="product-reviews-star pull-right">
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-default"></i>
+								</span>
+							</div>
+						</div>  
+					</div>
+					<div class="productview-reviews-item"> 
+						<div class="product-review-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ut, a </div>
+						<div class="product-review-head">
+							<img src="/assets/images/avatar.jpg">
+							<div class="productview-reviews-name clearfix">
+								by <a href="#">Koko M.</a>
+								<span class="product-reviews-star pull-right">
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-danger"></i>
+									<i class="fa fa-star text-default"></i>
+								</span>
+							</div>
+						</div>  
+					</div>
+					<div class="productview-reviews-item text-center">
+						<a href="#" class="pad10"><strong>Read All</strong></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-body" ng-if="!objProduct || objProduct.status != 'active'">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="text-center whitebox">Product is not available.</h4>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,66 @@
+<div class="page-wrap">
+	<div class="page-body" ng-if="objStore">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="profileBox">
+					<img ng-src="{{storeImg}}" alt="" class="profileBox-avatar">
+					<div class="profileBox-details">
+						<h3 class="clearfix">
+							{{objStore.store.name}} 
+								<a href="#" class="pull-right m0 btn btn-xs btn-primary" ng-if="!isfollowed" ng-click="followStore($event)">
+									<i class="glyphicon glyphicon-plus"></i> Follow</a> 
+								<a href="#" class="pull-right m0 btn btn-xs btn-warning" ng-if="isfollowed" ng-click="unfollowStore($event)">
+									<i class="glyphicon glyphicon-remove"></i> Unfollow</a> 
+						</h3>
+						<h5>@{{objStore.store.url}}</h5>
+						<p>{{objStore.store.description}}</p>  
+						<ul class="profileBox-meta mt20 clearfix">
+							<li>Products : 57</li>
+							<li>Reviews : 57</li>
+							<li>Followers : {{objStore.followers.length}}</li> 
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row"> 
+				<div class="col-md-3 col-sm-4" ng-repeat="objProd in objStoreProducts">
+					<div class="product-card product-card-cool product-card-cool-sm"> 
+						<a href="/p/{{objProd.prodid}}">
+							<span class="product-name">{{objProd.name}}</span>
+							<img ng-src="/uploads/{{objProd.store.id}}/products/md/{{objProd.images[0].img1 || objProd.images[0].img2 || objProd.images[0].img3 || objProd.images[0].img4 || 'none.jpg'}}">
+						</a>
+						<div class="product-meta clearfix">
+							<div class="product-price">PHP <span>{{objProd.price | currency:"":0}}</span></div>
+							<a href="/p/{{objProd.prodid}}" class="product-view">
+								<i class="glyphicon glyphicon-share-alt"></i> View
+							</a>
+							<a href="/p/{{objProd.prodid}}" class="product-like" ng-if="!objProd.inCartItem">
+								<i class="fa fa-cart-plus"></i> Cart
+							</a>
+							<a href="/my/cart/{{objProd.store.id}}" class="product-like product-like-active" ng-if="objProd.inCartItem">
+								<i class="fa fa-cart-plus"></i> Cart
+							</a>
+							<a class="product-wishlist product-wishlist-active" ng-if="objProd.isWishListed && rs_me" ng-click="removeFromWishlist(objProd._id)">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a> 
+							<a class="product-wishlist" ng-if="!objProd.isWishListed && rs_me" ng-click="addToWishlist(objProd._id)">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a> 
+							<a class="product-wishlist" ng-if="!rs_me" href="/login?r=/@{{objStore.store.url}}">
+								<i class="glyphicon glyphicon-gift"></i> Wishlist
+							</a> 
+						</div> 
+					</div>
+				</div>  
+			</div>
+	</div>
+
+	<div class="page-body" ng-if="!objStore">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="text-center whitebox">Page not found.</h4>
+			</div>
+		</div>
+	</div>
+</div>

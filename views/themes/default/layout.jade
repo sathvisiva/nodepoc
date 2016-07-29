@@ -1,0 +1,22 @@
+html
+  head
+    meta(charset='UTF-8')
+    title #{title}
+    link(rel='stylesheet', type='text/css', href='/assets/themes/default/css/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='/assets/themes/default/css/styles.css')
+    link(rel='stylesheet', type='text/css', href='/assets/themes/default/css/misc.css')
+  body
+    .container
+      .row.header-wrapper
+        .col-xs-12
+          h2#logo
+            a(href='/#{objUser.store.url}') #{objUser.store.name}
+            span eat shit and fuckoff...
+      .row
+        block content
+    script(type='text/javascript', src='/assets/themes/default/js/jquery.js')
+    script(type='text/javascript', src='/assets/themes/default/js/bootstrap.js')
+    script(type='text/javascript', src='/assets/themes/default/js/jquery.grid-a-licious.min.js')
+    script(type='text/javascript', src='/assets/themes/default/js/lodash.js')
+    script(type='text/javascript', src='/assets/javascript/js.cookie.js')
+    script(type='text/javascript', src='/assets/themes/default/js/default.js')

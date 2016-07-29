@@ -1,0 +1,202 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-wrap"> 
+			<div class="page-body">
+				<div class="row">
+					<div class="col-md-6 col-md-push-3"  ng-if="objProduct">
+						<form name="editProductForm" ng-submit="editPostSubmit()" novalidate>
+							<div class="form-card">
+								<h2 class="form-card-title clearfix">
+									Edit Product Details
+									<a href="/p/{{objProduct.prodid}}" target="new" class="pull-right font12 mt20">view</a>
+								</h2>
+								<div class="form-card-body">
+									<p>
+										<label>Product Name</label>
+										<input type="text" class="form-control input-sm" ng-model="objProduct.name" required /> 
+									</p>
+									<div class="mb10">
+										<label>Product Description</label>
+										<!--textarea ng-model="objProduct.desc" class="form-control hide" required ></textarea-->
+										<div text-angular 
+											ng-model="objProduct.desc" 
+											ta-toolbar="[['h1','h2','p'],['bold','italics','ul'],['justifyLeft', 'justifyCenter', 'justifyRight'],['insertImage','insertLink', 'insertVideo']]"
+											ta-toolbar-class="btn-toolbar btn-toolbar-ta" 
+											ta-toolbar-group-class="btn-group btn-group-xs"
+											 ta-toolbar-active-button-class="active btn-primary"
+										></div>
+									</div>
+									<p>
+										<label>Product Price</label>
+										<input type="number" class="form-control input-sm" ng-model="objProduct.price" required />
+									</p> 
+									<p>
+										<label>Related Products</label>
+										<select 
+											class="form-control input-sm" 
+											id="productRelated"
+											chosen 
+											multiple 
+											ng-model="productRelated" 
+											data-placeholder="Select a product" 
+											max-selected-options="3" 
+											search-contains="true"
+											ng-options="rel._id as rel.name for rel in relatedProducts"
+											ng-change="updateRelatedProducts(productRelated)">  
+										</select>
+									</p>
+								</div>
+							</div>
+
+							<div class="form-card">
+								<h2 class="form-card-title">Labels</h2>
+								<div class="form-card-body">
+									<p>
+										<label>Product Tags</label>
+										<tags-input ng-model="productTags" on-tag-added="updateTags(productTags)"></tags-input>
+									</p>
+									<p>
+										<label>Product Category</label>
+										<select class="form-control input-sm" ng-model="productMainCat" ng-change="updateMainCat(productMainCat)" required>
+											<option value="">Select a category</option>
+											<option ng-repeat="mainCat in mainCategories" value="{{mainCat}}">{{mainCat}}</option>
+										</select>
+									</p>
+									<p>
+										<label>Product SubCategory</label>
+										<select class="form-control input-sm" ng-model="productSubCat" ng-change="updateSubCat(productSubCat)" >
+											<option value="">Select a category</option>
+											<option ng-repeat="subCat in subCategories" value="{{subCat}}">{{subCat}}</option>
+										</select>
+									</p>
+								</div>
+							</div>
+
+							<div class="form-card">
+								<h2 class="form-card-title">Sale</h2>
+								<div class="form-card-body">
+									<div class="row">
+										<div class="col-sm-4 mb5">
+											<div class="form-group mb0">
+												<div class="input-group">
+													<input type="number" class="form-control input-sm" placeholder="0" name="saleoff" min="0" ng-model="objProduct.sale.off">
+													<div class="input-group-addon">% off </div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-4 mb5">
+											<input type="text" class="form-control input-sm" placeholder="Date Start" ng-model="objProduct.sale.start">
+										</div>
+										<div class="col-sm-4 mb5">
+											<input type="text" class="form-control input-sm" placeholder="Date End" ng-model="objProduct.sale.end">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-card hide">
+								<h2 class="form-card-title">Edit Product Sale</h2>
+								<div class="form-card-body"> 
+									<p class="mb20">
+										<label>Promo Code</label>
+										<select class="form-control input-sm">
+											<option>Select promo code</option>
+										</select>
+									</p> 
+									<div class="row">
+										<div class="col-md-4">
+											<p>
+												<label class="show">On Sale?</label>
+												<input type="checkbox"/> Yes
+											</p>		
+										</div>
+										<div class="col-md-4">
+											<p>
+												<label>From : </label>
+												<input class="form-control input-sm" />
+											</p>
+										</div>
+										<div class="col-md-4">
+											<p>
+												<label>To : </label>
+												<input class="form-control input-sm" />
+											</p>
+										</div>
+									</div> 
+								</div>
+							</div>
+							<div class="form-card">
+								<h2 class="form-card-title">Edit Product Images</h2>
+								<div class="form-card-body">
+									<div class="row">
+										<div class="col-xs-3">
+											<div class="productImage shadow" ng-class="{'hasImage' : objProduct.images[0]['img1']}" style="background-image: url({{objProduct.images[0]['img1'] ? '/uploads/'+rs_me._id+'/products/c/'+objProduct.images[0]['img1'] : '/assets/images/add.png'}})">
+												<img src="/assets/images/overlay.png">
+												<input data-imgtype="productImg1" type="file" onchange="angular.element(this).scope().editProductImage(this)">
+												<div class="removeImage" ng-click="removeProductImage($event)" data-imgtype="productImg1"></div> 
+											</div> 
+										</div> 
+										<div class="col-xs-3">
+											<div class="productImage shadow" ng-class="{'hasImage' : objProduct.images[0]['img2']}" style="background-image: url({{objProduct.images[0]['img2'] ? '/uploads/'+rs_me._id+'/products/c/'+objProduct.images[0]['img2'] : '/assets/images/add.png'}})">
+												<img src="/assets/images/overlay.png">
+												<input data-imgtype="productImg2" type="file" onchange="angular.element(this).scope().editProductImage(this)">
+												<div class="removeImage" ng-click="removeProductImage($event)" data-imgtype="productImg2"></div> 
+											</div>
+										</div> 
+										<div class="col-xs-3">
+											<div class="productImage shadow" ng-class="{'hasImage' : objProduct.images[0]['img3']}" style="background-image: url({{objProduct.images[0]['img3'] ? '/uploads/'+rs_me._id+'/products/c/'+objProduct.images[0]['img3'] : '/assets/images/add.png'}})">
+												<img src="/assets/images/overlay.png">
+												<input data-imgtype="productImg3" type="file" onchange="angular.element(this).scope().editProductImage(this)">
+												<div class="removeImage" ng-click="removeProductImage($event)" data-imgtype="productImg3"></div> 
+											</div>
+										</div> 
+										<div class="col-xs-3">
+											<div class="productImage shadow" ng-class="{'hasImage' : objProduct.images[0]['img4']}" style="background-image: url({{objProduct.images[0]['img4'] ? '/uploads/'+rs_me._id+'/products/c/'+objProduct.images[0]['img4'] : '/assets/images/add.png'}})">
+												<img src="/assets/images/overlay.png">
+												<input data-imgtype="productImg4" type="file" onchange="angular.element(this).scope().editProductImage(this)">
+												<div class="removeImage" ng-click="removeProductImage($event)" data-imgtype="productImg4"></div> 
+											</div>
+										</div>   
+									</div> 
+									<div class="row mt10" ng-if="isInvalidImage">
+										<div class="col-md-12">
+											<div class="mb0 alert alert-danger padTB10">{{isInvalidError}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-card pad20">
+								<div class="row">
+									<div class="col-md-12">
+										<p ng-if="isEditPostSuccess" class="alert alert-success">Success</p>
+										<p ng-if="isEditPostError" class="alert alert-success">Error</p>
+									</div>
+								</div>
+								<div class="row"> 
+									<div class="col-sm-6 col-xs-12 col-md-4 mb10">
+										<select ng-model="objProduct.status" id="" class="form-control"> 
+											<option value="active">Active</option>
+											<option value="draft">Draft</option>
+										</select>
+									</div>
+									<div class="col-sm-6 col-xs-12 col-md-8 mb10">
+										<input type="submit" ng-disabled="editProductForm.$invalid" value="Save Changes" class="btn btn-block btn-primary">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<a href="/manage/products/{{objProduct._id}}/delete" class="text-danger">Delete this prduct</a>
+									</div>
+								</div>
+							</div>
+						</form> 
+					</div>
+
+					<div class="col-md-12" ng-if="!objProduct">
+						<h4 class="text-center whitebox">Page not found.</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

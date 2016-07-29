@@ -1,0 +1,73 @@
+extends layout
+
+block content
+  if(objProduct)
+    .product-page-wrap
+      .col-sm-8.col-md-8
+        .product-page
+          span.product-page-img
+            -var arrProdImg = _.filter(objProduct.images[0], Boolean)
+            -if(arrProdImg && arrProdImg.length > 0){
+              #productImageCarousel.carousel.slide(data-ride='carousel') 
+                ol.carousel-indicators.hide
+                  li.active(data-target='#productImageCarousel', data-slide-to='0')
+                  li(data-target='#productImageCarousel', data-slide-to='1') 
+                .carousel-inner(role='listbox') 
+                  each prodImg, index in arrProdImg 
+                    -var isActive = index == 0 ? 'active' : ''
+                    .item(class=isActive)
+                      img.img-full(src='/uploads/#{objUser._id}/products/#{prodImg}') 
+                a.left.carousel-control(href='#productImageCarousel', role='button', data-slide='prev')
+                  span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                  span.sr-only Previous
+                a.right.carousel-control(href='#productImageCarousel', role='button', data-slide='next')
+                  span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                  span.sr-only Next 
+            -}else{
+              img.img-ful(src="/uploads/none.jpg")
+            -}
+          h1.product-page-title.mb20 #{objProduct.name} 
+          .product-page-description.mb20 !{objProduct.desc}
+        .product-page.mb20
+          h3.product-page-title.m0.mb20 Product Reviews
+          p No feedbacks yet.
+      .col-md-4.col-sm-4
+        .row 
+          .col-sm-12
+            .product-page.mb20
+              form#sideOrderForm(novalidate)
+                .input-group.mb10
+                  span.input-group-addon Qty
+                  input.form-control.text-center#sideQnty(type='number', placeholder='Quantity', value="1", min="1")
+                  span.input-group-addon Php 
+                    span#sideTotal(data-price="#{objProduct.price}") #{objProduct.price}
+                input.btn.btn-primary.btn-block#sideOrderBtn(type="submit", value="Add To Cart") 
+          .col-sm-12
+            h4.side-title Related Products
+          .col-sm-12.col-md-12
+            .product-box.product-box-sm
+              a(href='/product')
+                span.product-box-img
+                  img(src='/uploads/none.jpg')
+                  span.product-box-shadow
+                span.row.product-box-meta.clearfix
+                  span.pad0.pull-right 100
+                  span.pad0 Dragon Slayer And a very long title that have a two lines and shit
+          .col-sm-12.col-md-12
+            .product-box.product-box-sm
+              a(href='/product')
+                span.product-box-img
+                  img(src='/uploads/none.jpg')
+                  span.product-box-shadow
+                span.row.product-box-meta.clearfix
+                  span.pad0.pull-right 100
+                  span.pad0 Dragon Slayer And a very long title that have a two lines and shit
+          .col-sm-12.col-md-12
+            .product-box.product-box-sm
+              a(href='/product')
+                span.product-box-img
+                  img(src='/uploads/none.jpg')
+                  span.product-box-shadow
+                span.row.product-box-meta.clearfix
+                  span.pad0.pull-right 100
+                  span.pad0 Dragon Slayer And a very long title that have a two lines and shit 

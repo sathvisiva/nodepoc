@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-wrap"> 
+			<div class="page-body">
+				<div class="row">
+					<div class="col-md-6 col-md-push-3"> 
+						<div class="form-card">
+							<h2 class="form-card-title">Delete Product</h2>
+							<div class="form-card-body">
+								<div ng-if="objPost" class="alert alert-danger text-center">
+									<div ng-if="!isDeletePostSuccess">
+										<p>Are you sure you want to delete this product?</p>
+										<p>
+											<a href="#" ng-click="deletePostSubmit()" class="btn btn-danger">Yes</a>
+											<a href="/manage/products/{{objPost._id}}/edit" class="btn btn-default">Cancel</a>
+										</p>
+									</div>
+									<p ng-if="isDeletePostSuccess" class="">Success</p>
+									<p ng-if="isDeletePostError" class="">Error</p>
+								</div>
+
+								<div ng-if="!objPost" class="alert alert-danger text-center">
+									No post to delete
+								</div>
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
